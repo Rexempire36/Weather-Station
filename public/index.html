@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Station Dashboard</title>
+    <!-- Firebase SDK (latest version via CDN or npm install) -->
+    <script type="module" src="/__/firebase/10.10.0/firebase-app.js"></script>
+    <script type="module" src="/__/firebase/10.10.0/firebase-firestore.js"></script>
+    <script type="module" src="/__/firebase/init.js"></script>
+
+    <!-- Chart.js for graphing -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        h1 { color: #007bff; text-align: center; }
+        .controls { text-align: center; margin-bottom: 20px; }
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .chart-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Station Dashboard</h1>
+
+    <div class="controls">
+        <label for="startDate">From:</label>
+        <input type="datetime-local" id="startDate">
+        <label for="endDate">To:</label>
+        <input type="datetime-local" id="endDate">
+        <button onclick="fetchHistoricalData()">Show History</button>
+        <button onclick="setupRealtimeListener()">Show Realtime</button>
+    </div>
+
+    <div class="chart-container">
+        <div class="chart-card">
+            <h2>Temperature (°C)</h2>
+            <canvas id="temperatureChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <h2>Humidity (%)</h2>
+            <canvas id="humidityChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <h2>Pressure (hPa)</h2>
+            <canvas id="pressureChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <h2>Dew Point (°C)</h2>
+            <canvas id="dewPointChart"></canvas>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
